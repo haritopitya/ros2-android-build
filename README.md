@@ -3,54 +3,36 @@
 Build [rcljava](https://github.com/ros2-java/ros2_java) for android.  
 
 
-## Versions & Envs
-
+## Environment
+Modify [Dockerfile](./Dockerfile) to change environment
 - NDK:  android-ndk-r23b
 - ABI: arm64-v8a  
-- Android API Level(minSdkVersion): android-24
+- Android API Level: 24
 
-## ROS2 java version  
+## ROS2 version  
 
-[repo](./ros2_java_android.repos)  
-This project uses galactic. However, due to some issues, subscriptions are not working with other galactic publishers. I recommend using humble nodes as a counterpart of the android's node.
+Modify [repo](./ros2_java_android.repos) to change ROS2 version.
 
+Currently ROS2 Humble is selectd for the building.
 
-## Steps to build
+## How to build
 
-### 1. Build docker image
+### 1. Clone repository
+```
+git clone https://github.com/nicholaslu/ros2-android-build
+cd ros2-android-build/
+```
+
+### 2. Build docker image
 ```
 docker build -t ros2java-android-build ./
 ```
 
-### 2. Build
+### 3. Build
 ```
-python3 run.py ./out/soOut ./out/jarOut --srcDir ../src 
+python3 run.py ./out/soOut ./out/jarOut
 ```
-First and Second argument specifies where to copy build results.  
-Eg. Specify `libs` and `jniLibs` dir of your Android project to copy `.jar` files and `.so` files.  
 
-`--srcDir` option is using for adding packages other than ros2 java related packages, for example your own message package.  
-You can just specify your `src` dir which contains multiple packages. This option is not mandatory.
-
-
-## Note1   
-↓Android project structure example.  
-```
-app
- -libs
-    - .jar files
- - src
-    - main
-        - java
-        - jniLibs
-            - arm64-v8a
-                - .so files
-        - res
-        - AndroidManifest.xml
-
-```
-Refer to example project: https://github.com/YasuChiba/ros2-android-test-app
-
-## Note2 
-Build `ros2_android` and `ros2_android_examples` by this Dockerfile is currently not supported.  
-Please build your android app by using Android Studio.
+### 4. Copy files to Android Studio project
+Copy `.jar` files to `app/libs` and `.so` files to `app/src/main/jniLibs`
+and add `implementation fileTree(include: ['*.jar'], dir: 'libs')` to `dependencies{}` of `app/build.gradle`
