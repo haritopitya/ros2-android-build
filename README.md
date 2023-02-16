@@ -1,10 +1,10 @@
 # ros2-android-build
 
-Build [rcljava](https://github.com/ros2-java/ros2_java) for android.  
+Build [rcljava](https://github.com/ros2-java/ros2_java) for Android.  
 
 
 ## Environment
-Modify [Dockerfile](./Dockerfile) to change environment
+Modify [Dockerfile](./Dockerfile) to change environment.
 - NDK:  android-ndk-r23b
 - ABI: arm64-v8a  
 - Android API Level: 24
