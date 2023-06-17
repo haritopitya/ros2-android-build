@@ -34,5 +34,5 @@ python3 run.py ./out/soOut ./out/jarOut
 ```
 
 ### 4. Copy files to Android Studio project
-Copy `.jar` files to `app/libs` and `.so` files to `app/src/main/jniLibs`
+Copy `.jar` files to `app/libs/rcljava` and `.so` files to `app/src/main/jniLibs/arm64-v8a`
 and add `implementation fileTree(include: ['*.jar'], dir: 'libs')` to `dependencies{}` of `app/build.gradle`
